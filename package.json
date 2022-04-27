@@ -1,0 +1,26 @@
+{
+  "name": "studocu-assignment",
+  "version": "1.0.0",
+  "description": "StuDocu test assignment",
+  "main": "bundle.js",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "python3 -m http.server 8000 & $(npm bin)/cypress run -C cypress.json; pkill -9 -f 'python3 -m http.server 8000'; fuser -k 8000/tcp; lsof -nti:8000 | xargs kill -9",
+    "kill": "pkill -9 -f 'python3 -m http.server 8000'; fuser -k 8000/tcp; lsof -nti:8000 | xargs kill -9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirillburton/studocu-assignment.git"
+  },
+  "author": "kirillburton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kirillburton/studocu-assignment/issues"
+  },
+  "homepage": "https://github.com/kirillburton/studocu-assignment#readme",
+  "dependencies": {
+    "cypress": "^9.6.0",
+    "cypress-plugin-tab": "^1.0.5",
+    "uuid": "^8.3.2"
+  }
+}
