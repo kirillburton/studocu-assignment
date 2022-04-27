@@ -15,9 +15,6 @@ describe('Questions page', () => {
 
 function questionsSuite() {
     it('shows a sample question in default state', () => {
-        // This test tests either default state of the page 
-        // or previously saved question depending on our requirements.
-        // In our case it's just to ensure the default question is shown.
         const page = new QuestionsPage(cy);
 
         page.firstQuestion
@@ -25,15 +22,15 @@ function questionsSuite() {
             .should('contain.text', 'How to add a question?');
     });
 
-    it('allows to reveal an answer to a question', () => {
+    it('allows to reveal and hide an answer to a question', () => {
         const page = new QuestionsPage(cy);
-        // It's a bad practice to depend on data/default behaviour that was not explicitly stated in the test.
-        // Keeping that in mind we'll still use the default question here, because it's a test assignment 
         page.firstQuestion.click();
 
         page.firstAnswer
             .should('be.visible')
-            .should('contain.text', 'Just use the form below!');
+            .should('contain.text', 'Just use the form below!')
+        page.firstQuestion.click();
+        page.firstAnswer.should('not.be.visible');
     })
 
     it('allows to submit first question', () => {
@@ -163,10 +160,6 @@ function questionsSuite() {
         page.getNthAnswer(2).should('contain.text', firstQuestion.answer);
     });
 
-    // Ideally, testing form validations should be in jest tests for each field,
-    // but we should test that the whole page state is invalid when a required field is invalid
-    // even though here the only validation is 'not empty'
-
     it('does not submit answer without a question', () => {
         const page = new QuestionsPage(cy);
         page.removeAllQuestions();
@@ -189,7 +182,7 @@ function questionsSuite() {
         page.firstQuestion.should('not.exist');
     });
 
-    it('does not reveal answers to closed questions after sorting', () => {
+    it('does not reveal answers for closed questions after sorting', () => {
         const page = new QuestionsPage(cy);
         page.removeAllQuestions();
         const firstQuestion = new QuestionBuilder()
@@ -207,7 +200,7 @@ function questionsSuite() {
         page.firstQuestion.click();
         page.sortQuestions();
         
-        page.firstAnswer.should('not.be.visible', 'Previously closed question has its answer revealed after sorting. That\'s a bug.');
+        page.firstAnswer.should('not.be.visible');
     });
 }
 
