@@ -1,5 +1,4 @@
-# Quality Assurance engineer test for StuDocu
-This is a test assignment. 
+# QA Engineer test for StuDocu
 
 **For a cloud run:**
 see GitHub workflow "Cypress Tests" – create a pull request, add an empty commit or anything else to your taste
@@ -30,7 +29,7 @@ $ npm run kill
 
 Tests code is [here](https://github.com/kirillburton/studocu-assignment/blob/main/tests/questions-page-tests.spec.js)
 
-Notes and Insights:
+## Notes and Insights:
 - I've made a simple CI with GitHub Actions + Docker + Cypress. It runs all tests in an isolated environment on any push to a branch. Browser-wise it runs only in Chrome with two viewports for most cases – desktop and mobile. With more time we could do multiple browsers + parallelization; 
 - The suite is validly failing because of a behavior that I consider a bug: when you reveal an answer to one question and sort questions afterward, answer is revealed for any question that ends up in that position after sorting;
 - I haven't designed any boundary values tests and stuff like that, because that should not be on an e2e regression layer;
